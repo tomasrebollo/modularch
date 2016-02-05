@@ -1,0 +1,26 @@
+{
+  "name": "modularch",
+  "version": "1.0.0",
+  "description": "A simple node.js module template for plug-in based architecture projects",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomasrebollo/modularch.git"
+  },
+  "author": "trebollo",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tomasrebollo/modularch/issues"
+  },
+  "homepage": "https://github.com/tomasrebollo/modularch#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
+    "http": "0.0.0"
+  }
+}
