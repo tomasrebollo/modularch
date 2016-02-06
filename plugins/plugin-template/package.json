@@ -1,0 +1,17 @@
+{
+  "name": "plugin-template",
+  "version": "1.0.0",
+  "description": "Basic template of a plugin for a modularch project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "trebollo",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "async": "^1.5.2",
+    "express": "^4.13.4",
+    "lodash": "^4.2.1",
+    "node-uuid": "^1.4.7"
+  }
+}
