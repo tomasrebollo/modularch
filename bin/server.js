@@ -6,22 +6,22 @@
  * Module dependencies.
  */
 
-var http        = require('http');
-var debug       = require('debug')('modularch');
-var serverApp   = require('../app').server;
+var http            = require('http');
+var debug           = require('debug')('modularch');
+var app             = require('../app');
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-serverApp.set('port', port);
+app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(serverApp);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -21,6 +21,9 @@
     "body-parser": "^1.14.2",
     "debug": "^2.2.0",
     "express": "^4.13.4",
-    "http": "0.0.0"
-  }
+    "fs": "0.0.2",
+    "http": "0.0.0",
+    "lodash": "^4.2.1"
+  },
+  "plugins": "./plugins"
 }
