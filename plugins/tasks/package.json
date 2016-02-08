@@ -1,7 +1,7 @@
 {
-  "name": "plugin-template",
+  "name": "tasks",
   "version": "1.0.0",
-  "description": "Basic template of a plugin for a modularch project.",
+  "description": "A plugin for a modularch project, that provides a trasparent management of tasks.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,5 +13,11 @@
     "express": "^4.13.4",
     "lodash": "^4.2.1",
     "node-uuid": "^1.4.7"
+  },
+  "plugin": {
+    "scripts": [
+      "/public/js/app.js",
+      "/public/js/mainCtrl.js"
+    ]
   }
 }

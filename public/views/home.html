@@ -1,0 +1,22 @@
+<div class="jumbotron">
+    <h1>Welcome to <strong>Modularch</strong> <i class="fa fa-puzzle-piece"></i></h1>
+    <hr>
+    <p>List of registered plugins ({{plugins.length}})</p>
+
+    <div class="row">
+        <div ng-repeat="plugin in plugins" class="col-lg-4 col-sm-6">
+            <div class="card card-block">
+                <h3 class="card-title">{{plugin.name}} <small>{{plugin.version}}</small></h3>
+                <p class="card-text">{{plugin.description}}</p>
+                <a ui-sref="{{plugin.name}}" class="btn btn-primary">Go <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <div class="card card-block">
+                <h3 class="card-title">Special title treatment</h3>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>

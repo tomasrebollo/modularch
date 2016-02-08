@@ -5,6 +5,7 @@
 var _       = require('lodash');
 var fs      = require('fs');
 var path    = require('path');
+var express = require('express');
 var Plugin  = require('./models/plugin');
 var pkgJson = require('./package.json');
 
@@ -77,9 +78,15 @@ PluginManager.prototype.loadPlugins = function() {
  */
 PluginManager.prototype.register = function (pluginDef, pluginDir) {
 
-    // Create the plugin and initialize
+    // Create the plugin
     var plugin = new Plugin(pluginDef, pluginDir);
-    this.app.use('/' + plugin.name, plugin.router);
+
+    // Configure the express router
+    //this.app.use('/' + plugin.name + '/public', express.static(path.resolve(this.folder, plugin.name, 'public')));
+    //this.app.use('/' + plugin.name, plugin.router);
+
+    // Init the plugin
+    plugin.init(this.app);
 
     // Finally store the plugin
     this.plugins.push(plugin);

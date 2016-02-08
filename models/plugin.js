@@ -9,10 +9,16 @@ function Plugin (def, dir) {
     this.description = def.description;
 
     // Load the plugin and set a reference to its router handler
-    this.app = require(dir);
-    this.app.init();
-
-    this.router = this.app.router;
+    this.module = require(dir);
+    //this.router = this.module.router;
 }
+
+/**
+ * Initializes the plugin module, passing a reference to the main App.
+ * @param app
+ */
+Plugin.prototype.init = function (app) {
+    this.module.init(app);
+};
 
 module.exports = Plugin;
