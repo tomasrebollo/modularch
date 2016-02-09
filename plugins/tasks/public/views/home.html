@@ -20,5 +20,9 @@
         </li>
     </ul>
 
-    <div ui-view="testView" class="col-xl-4"></div>
+    <div class="col-xl-4">
+        <button class="btn btn-sm btn-secondary" ui-sref-active="disabled" ui-sref="tasks.test1">Test1</button>
+        <button class="btn btn-sm btn-secondary" ui-sref-active="disabled" ui-sref="tasks.test2">Test2</button>
+        <div ui-view="testView"></div>
+    </div>
 </div>

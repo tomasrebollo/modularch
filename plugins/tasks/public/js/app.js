@@ -10,9 +10,9 @@ angular.module('pg.tasks', ['pg.common', 'ui.router'])
         var pluginName = 'tasks';
         var pluginBaseUrl = '/' + pluginName;
 
-        // For any unmatched url, redirect to /home. This will be satisfied when app is launched
-        // as a stand alone app instead of a plugin app.
-        $urlRouterProvider.when('', '/tasks');
+        // For any unmatched url, redirect to base url. This will be satisfied when
+        // the app is launched as a stand alone , instead of a plugin app.
+        $urlRouterProvider.when('', pluginBaseUrl);
 
         // Now set up the states
         $stateProvider
