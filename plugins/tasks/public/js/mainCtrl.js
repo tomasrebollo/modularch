@@ -2,23 +2,23 @@
  * Created by trebollo on 7/2/16.
  */
 
-//angular.module('pg.imt')
 angular.module('pg.tasks')
 
-    .controller('pg.tasks.mainCtrl', function ($scope, TasksStore) {
+    .controller('pg.tasks.mainCtrl', function ($scope, TasksStore, PluginsStore) {
 
         $scope.pluginName = 'Tasks Plugin';
-        $scope.tasks = TasksStore.tasks;
+        $scope.tasks = TasksStore.getTasks();
+        $scope.plugins = PluginsStore.getPlugins();
 
         /**
-         * Creates a new random task
+         * Retrieves the tasks form the TasksStore.
          */
         $scope.getTasks = function () {
-            $scope.tasks = TasksStore.tasks;
+            $scope.tasks = TasksStore.getTasks();
         };
 
         /**
-         * Creates a new random task
+         * Creates a new random task.
          */
         $scope.createNewTask = function () {
             TasksStore.createNewTask();

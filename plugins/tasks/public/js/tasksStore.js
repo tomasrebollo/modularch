@@ -2,7 +2,6 @@
  * Created by trebollo on 7/2/16.
  */
 
-//angular.module('pg.imt')
 angular.module('pg.tasks')
 
     .service('TasksStore', function ($http) {
@@ -54,6 +53,14 @@ angular.module('pg.tasks')
         };
 
         /**
+         * Retrieves all the existing tasks.
+         * @returns {pg.tasks|Array|*}
+         */
+        this.getTasks = function () {
+            return this.tasks;
+        };
+
+        /**
          * Creates a new random task.
          */
         this.createNewTask = function () {
@@ -97,12 +104,3 @@ angular.module('pg.tasks')
         };
 
     });
-
-
-function doCallback (callback) {
-    if (callback && (typeof callback === 'function')) {
-        var args = Array.prototype.slice.call(arguments, 1);
-        args = args.splice(0, 1);
-        callback.apply(null, args);
-    }
-}

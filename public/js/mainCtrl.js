@@ -5,5 +5,7 @@
 angular.module('pg.imt')
 
     .controller('mainCtrl', function ($scope, PluginsStore) {
-        $scope.plugins = PluginsStore.plugins;
+
+        $scope.plugins = PluginsStore.getPlugins();
+
     });

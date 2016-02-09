@@ -16,7 +16,8 @@ angular.module('pg.common', []);
  */
 function doCallback (callback) {
     if (callback && (typeof callback === 'function')) {
-        var args = Array.prototype.slice.call(arguments).splice(0, 1);
+        var args = Array.prototype.slice.call(arguments);
+        args.splice(0, 1);
         callback.apply(null, args);
     }
 }

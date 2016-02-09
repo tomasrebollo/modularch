@@ -2,10 +2,9 @@
  * Created by trebollo on 6/2/16.
  */
 
-//angular.module('pg.imt')
 angular.module('pg.tasks', ['pg.common', 'ui.router'])
 
-    .config(function($stateProvider,$urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
 
         var pluginName = 'tasks';
         var pluginBaseUrl = '/' + pluginName;

@@ -13,8 +13,12 @@ angular.module('pg.imt', ['pg.common', 'ui.router', 'oc.lazyLoad'])
         $stateProvider
             .state('home', {
                 url: '/home',
-                templateUrl: 'home.html',
-                controller: 'mainCtrl',
+                views: {
+                    '': {
+                        templateUrl: 'home.html',
+                        controller: 'mainCtrl',
+                    }
+                },
                 resolve: {
                     loadPlugins: function ($q, PluginsStore) {
                         var deferred = $q.defer();
@@ -38,9 +42,10 @@ angular.module('pg.imt', ['pg.common', 'ui.router', 'oc.lazyLoad'])
                             }
                         }
 
-                        // Lazy load the each plugin scripts
+                        // Lazy load each plugin's scripts, which are defined in each module's package.json 'plugin' property
                         angular.forEach(PluginsStore.plugins, function (plugin) {
-                            $ocLazyLoad.load([plugin.name + '/public/js/app.js', plugin.name + '/public/js/mainCtrl.js', plugin.name + '/public/js/tasksStore.js'])
+                            var scripts = _.map(plugin.defs.scripts, function (script) { return plugin.name + script; });
+                            $ocLazyLoad.load(scripts)
                                 .then(function() { done(true); }, function() { done(false); });
                         });
 

@@ -17,7 +17,7 @@ function TaskApp () {
 }
 
 TaskApp.prototype.init = function (app) {
-    console.log('Initializing plugin Task App ...');
+    console.log('Initializing plugin Task ...');
     // Configure the express router
     app.use('/' + moduleDefs.name, express.static(path.resolve(__dirname)));
     app.use('/' + moduleDefs.name, router);

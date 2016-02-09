@@ -17,7 +17,8 @@
   "plugin": {
     "scripts": [
       "/public/js/app.js",
-      "/public/js/mainCtrl.js"
+      "/public/js/mainCtrl.js",
+      "/public/js/tasksStore.js"
     ]
   }
 }

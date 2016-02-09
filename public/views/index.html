@@ -11,6 +11,7 @@
     <!-- Scripts from 3rd parties -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.min.js"></script>
+    <script src="lib/async.js"></script>
     <script src="lib/lodash.js"></script>
     <script src="lib/ocLazyLoad.js"></script>
 
@@ -21,17 +22,19 @@
 
     <script src="app.js"></script>
     <script src="mainCtrl.js"></script>
+    <script src="navbarCtrl.js"></script>
 
 </head>
-
 <body>
 
 <!-- Top navbar always visible from all app views -->
-<nav class="navbar navbar-light bg-faded">
-    <div class="nav navbar-nav">
-        <a class="nav-item nav-link active" ui-sref="home">Home <span class="sr-only">(current)</span></a>
-    </div>
-</nav>
+<div ng-controller="navbarCtrl">
+    <nav class="navbar navbar-light bg-faded">
+        <div class="nav navbar-nav">
+            <a class="nav-item nav-link" ng-repeat="view in views" ui-sref="{{view.state}}" ui-sref-active="active" href="">{{view.name}} <span class="sr-only">(current)</span></a>
+        </div>
+    </nav>
+</div>
 
 <!-- Main content view that will change depending on module's view -->
 <div ui-view></div>
