@@ -1,11 +1,17 @@
 
 <div class="jumbotron clearfix">
+
+    <!-- Header title -->
     <h1>Hello from {{pluginName}} <i class="fa fa-tasks"></i></h1>
     <hr>
+
+    <!-- Actions container that allows to perform main actions (create a task, etc.) -->
     <div>
         <button class="btn btn-sm btn-primary" ng-click="createNewTask()"><i class="fa fa-plus"></i> New task</button>
     </div>
     <br>
+
+    <!-- Complete list of existing tasks -->
     <ul class="list-group col-xl-8">
         <li ng-repeat="task in tasks" class="list-group-item">
             <h5 class="list-group-item-heading">
@@ -20,9 +26,11 @@
         </li>
     </ul>
 
+    <!-- Testing nested views -->
     <div class="col-xl-4">
         <button class="btn btn-sm btn-secondary" ui-sref-active="disabled" ui-sref="tasks.test1">Test1</button>
         <button class="btn btn-sm btn-secondary" ui-sref-active="disabled" ui-sref="tasks.test2">Test2</button>
         <div ui-view="testView"></div>
     </div>
+
 </div>
