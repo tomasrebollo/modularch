@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/views'));
 app.use(express.static(__dirname + '/public/js'));
 app.use(express.static(__dirname + '/public/css'));
+app.use(express.static(__dirname + '/public/imgs'));
 
 // Every request should be checked for authorisation first
 app.use('*', authRouter);

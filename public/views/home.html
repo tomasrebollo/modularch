@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <h1>Welcome to <strong>Modularch</strong> <i class="fa fa-puzzle-piece"></i></h1>
+    <h1>Welcome to <strong>IMT</strong></h1>
     <hr>
     <p>List of registered plugins ({{plugins.length}})</p>
 
@@ -7,7 +7,7 @@
         <div class="card-deck">
             <div ng-repeat="plugin in plugins" class="card">
                 <div class="card-block">
-                    <h4 class="card-title">{{plugin.name}} <small class="text-muted">{{plugin.version}}</small></h4>
+                    <h4 class="card-title"><i class="fa fa-puzzle-piece"></i> {{plugin.name}} <small class="text-muted">{{plugin.version}}</small></h4>
                     <p class="card-text">{{plugin.description}}</p>
                     <a ui-sref="{{plugin.name}}" class="btn btn-primary">Go <i class="fa fa-arrow-right"></i></a>
                 </div>

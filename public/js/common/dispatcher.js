@@ -4,7 +4,7 @@
 
 angular.module('pg.common')
 
-    .service('Dispatcher', function () {
+    .service('CommonDispatcher', function () {
 
         this.listeners = [];
 

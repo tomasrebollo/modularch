@@ -4,7 +4,7 @@
 
 angular.module('pg.common')
 
-    .service('PluginsStore', function ($http) {
+    .service('PluginsStore', function ($http, CommonDispatcher) {
 
         this.plugins = [];
         this.listeners = [];
@@ -68,11 +68,11 @@ angular.module('pg.common')
                                 doCallback(callback, self.plugins);
                             } else {
                                 console.log(err.message);
-                                doCallback(callback, []);
+                                doCallback(callback, null);
                             }
                         });
                 }, function (err) {
-                    doCallback(callback, []);
+                    doCallback(callback, null);
                 });
         };
 

@@ -4,37 +4,18 @@
 
 angular.module('pg.tasks')
 
-    .service('TasksStore', function ($http) {
+    .service('TasksStore', function ($http, EventManager) {
 
         this.tasks = [];
-        this.listeners = [];
-        this.events = {
-            TASK_ADDED:   'TASK_ADDED',
-            TASK_UPDATED: 'TASK_UPDATED',
-            TASK_REMOVED: 'TASK_REMOVED'
-        };
+        this.eventManager = new EventManager();
 
         /**
-         * Emits an event to all subscribed listeners.
-         * @param event
+         * Registers a listener that will be notified whenever given event raises.
+         * @param event     The event the listener wants to be subscribed to.
+         * @param callback  A function to be executed whenever the event raises.
          */
-        this.listenTo = function (event, callback) {
-            if (!this.listeners[event]) {
-                this.listeners[event] = [];
-            }
-            this.listeners[event].push(callback);
-        };
-
-        /**
-         * Emits an event to all subscribed listeners.
-         * @param event
-         */
-        this.emitEvent = function (event) {
-            if (this.listeners[event]) {
-                angular.forEach(this.listeners[event], function (callback) {
-                    doCallback(callback);
-                });
-            }
+        this.register = function (event, callback) {
+            this.eventManager.register(event, callback);
         };
 
         /**
@@ -63,13 +44,13 @@ angular.module('pg.tasks')
         /**
          * Creates a new random task.
          */
-        this.createNewTask = function () {
+        this.createNewTask = function (name) {
             var self = this;
-            var name = 'task-' + (Math.round(Math.random() * 100));
+            var name = name ? name : ('task-' + (Math.round(Math.random() * 100)));
             $http.post('/tasks/tasks/' + name, null)
                 .then(function (res) {
                         self.loadTasks(function () {
-                            self.emitEvent(self.events.TASK_ADDED);
+                            self.eventManager.emit('TASK_ADDED');
                         });
                     }
                 );
@@ -84,7 +65,7 @@ angular.module('pg.tasks')
             $http.post('/tasks/tasks/' + task.id + '/execute', null)
                 .then(function (res) {
                     self.loadTasks(function () {
-                        self.emitEvent(self.events.TASK_UPDATED);
+                        self.eventManager.emit('TASK_UPDATED');
                     });
                 });
         };
@@ -98,7 +79,7 @@ angular.module('pg.tasks')
             $http.delete('/tasks/tasks/' + task.id)
                 .then(function (res) {
                     self.loadTasks(function () {
-                        self.emitEvent(self.events.TASK_REMOVED);
+                        self.eventManager.emit('TASK_REMOVED');
                     });
                 });
         };

@@ -22,8 +22,8 @@ angular.module('pg.imt', ['pg.common', 'ui.router', 'oc.lazyLoad'])
                 resolve: {
                     loadPlugins: function ($q, PluginsStore) {
                         var deferred = $q.defer();
-                        PluginsStore.loadPlugins(function (res) {
-                            if (res) {
+                        PluginsStore.loadPlugins(function (plugins) {
+                            if (plugins) {
                                 deferred.resolve();
                             } else {
                                 deferred.reject();
@@ -33,7 +33,8 @@ angular.module('pg.imt', ['pg.common', 'ui.router', 'oc.lazyLoad'])
                     },
                     loadPluginsScripts: function ($q, loadPlugins, PluginsStore, $ocLazyLoad) {
                         var deferred = $q.defer();
-                        var num = PluginsStore.plugins.length;
+                        var plugins = PluginsStore.getPlugins();
+                        var num = plugins.length;
 
                         // Function to be executed whenever a plugin has loaded all its scripts
                         function done (success) {
@@ -43,7 +44,7 @@ angular.module('pg.imt', ['pg.common', 'ui.router', 'oc.lazyLoad'])
                         }
 
                         // Lazy load each plugin's scripts, which are defined in each module's package.json 'plugin' property
-                        angular.forEach(PluginsStore.plugins, function (plugin) {
+                        angular.forEach(plugins, function (plugin) {
                             var scripts = _.map(plugin.defs.scripts, function (script) { return plugin.name + script; });
                             $ocLazyLoad.load(scripts)
                                 .then(function() { done(true); }, function() { done(false); });

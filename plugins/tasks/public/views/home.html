@@ -15,12 +15,13 @@
     <ul class="list-group col-xl-8">
         <li ng-repeat="task in tasks" class="list-group-item">
             <h5 class="list-group-item-heading">
-                {{task.name}} <small><label class="label label-pill label-warning">{{task.state}}</label></small>
+                {{task.name}}
                 <div class="pull-xs-right">
                     <button class="btn btn-sm btn-primary" ng-click="executeTask(task)">Execute</button>
                     <button class="btn btn-sm btn-secondary" ng-click="removeTask(task)">Dismiss</button>
                 </div>
             </h5>
+            <progress class="progress progress-success" value="{{task.progress}}" max="100">{{task.progress}}%</progress>
             <small class="list-group-item-text">Created at {{task.created | date: 'hh:mm:ss dd-MM-yyyy'}}</small>
             <small class="list-group-item-text">Last executed at {{task.lastExecuted | date: 'hh:mm:ss dd-MM-yyyy'}}</small>
         </li>

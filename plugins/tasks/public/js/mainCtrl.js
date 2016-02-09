@@ -40,10 +40,8 @@ angular.module('pg.tasks')
             TasksStore.removeTask(task);
         };
 
-
         // Subscribe to TaskStore events
-        TasksStore.listenTo(TasksStore.events.TASK_ADDED,   function () { $scope.getTasks(); });
-        TasksStore.listenTo(TasksStore.events.TASK_UPDATED, function () { $scope.getTasks(); });
-        TasksStore.listenTo(TasksStore.events.TASK_REMOVED, function () { $scope.getTasks(); });
-
+        TasksStore.register('TASK_ADDED',   function () { $scope.getTasks(); });
+        TasksStore.register('TASK_UPDATED', function () { $scope.getTasks(); });
+        TasksStore.register('TASK_REMOVED', function () { $scope.getTasks(); });
     });

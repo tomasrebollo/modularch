@@ -1,0 +1,14 @@
+
+/* Overrides default margins of Bootstrap progress bars  */
+.progress {
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+.nav-user-info {
+    float: right;
+    padding-top: 0.675rem;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 90%;
+}

@@ -4,7 +4,15 @@
 
 angular.module('pg.dashboard')
 
-    .controller('pg.dashboard.mainCtrl', function ($scope) {
+    .controller('pg.dashboard.mainCtrl', function ($scope, TasksStore) {
 
         $scope.pluginName = 'Dashboard Plugin';
+
+        /**
+         * Adds a task through TasksStore.
+         * @param name  The name of the task
+         */
+        $scope.addTask = function (name) {
+            TasksStore.createNewTask(name);
+        };
     });

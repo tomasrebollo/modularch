@@ -3,7 +3,7 @@
  */
 
 //angular.module('pg.imt')
-angular.module('pg.dashboard', ['pg.common', 'ui.router'])
+angular.module('pg.dashboard', ['ui.router', 'pg.common', 'pg.tasks'])
 
     .config(function($stateProvider, $urlRouterProvider) {
 
