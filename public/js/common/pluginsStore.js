@@ -45,7 +45,7 @@ angular.module('pg.common')
 
         /**
          * Load the plugins from server.
-         * @param callback
+         * @param callback  A callback function that will be called with an array of plugins.
          */
         this.loadPlugins = function (callback) {
             var self = this;
@@ -54,6 +54,7 @@ angular.module('pg.common')
                     self.plugins = res.data;
                     async.map(self.plugins,
                         function (plugin, doneCallback) {
+                            // Retrieve each plugin information
                             $http.get('/' + plugin.name + '/about')
                                 .then(function (aboutResponse) {
                                     plugin.defs = aboutResponse.data.plugin;
