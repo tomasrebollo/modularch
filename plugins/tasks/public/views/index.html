@@ -1,22 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pg.tasks">
+<head>
+    <meta charset="UTF-8">
+    <title>Internal Management Tool</title>
 
-<div class="jumbotron">
-    <h1>Hello from {{pluginName}} <i class="fa fa-tasks"></i></h1>
-    <hr>
-    <div>
-        <button class="btn btn-sm btn-primary" ng-click="createNewTask()"><i class="fa fa-plus"></i> New task</button>
-    </div>
-    <br>
-    <ul class="list-group">
-        <li ng-repeat="task in tasks" class="list-group-item">
-            <h5 class="list-group-item-heading">
-                {{task.name}} <small><label class="label label-pill label-warning">{{task.state}}</label></small>
-                <div class="pull-xs-right">
-                    <button class="btn btn-sm btn-primary" ng-click="executeTask(task)">Execute</button>
-                    <button class="btn btn-sm btn-secondary" ng-click="removeTask(task)">Dismiss</button>
-                </div>
-            </h5>
-            <small class="list-group-item-text">Created at {{task.created}}</small>
-            <small class="list-group-item-text">Last executed at {{task.lastExecuted}}</small>
-        </li>
-    </ul>
-</div>
+    <!-- Stylesheets -->
+    <link href="public/css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="public/css/font-awesome-4.5.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
+
+    <!-- Scripts from 3rd parties -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.min.js"></script>
+    <script src="public/js/lib/lodash.js"></script>
+    <script src="public/js/lib/ocLazyLoad.js"></script>
+
+    <!-- Application scripts -->
+    <script src="public/js/common/common.js"></script>
+    <script src="public/js/common/dispatcher.js"></script>
+
+    <script src="public/js/app.js"></script>
+    <script src="public/js/mainCtrl.js"></script>
+    <script src="public/js/tasksStore.js"></script>
+
+</head>
+<body>
+
+<div ui-view></div>
+
+</body>
+</html>

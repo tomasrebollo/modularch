@@ -2,7 +2,7 @@
  * Created by trebollo on 6/2/16.
  */
 
-angular.module('modularch', ['ui.router', 'oc.lazyLoad'])
+angular.module('pg.imt', ['pg.common', 'ui.router', 'oc.lazyLoad'])
 
     .config(function($stateProvider, $urlRouterProvider) {
 

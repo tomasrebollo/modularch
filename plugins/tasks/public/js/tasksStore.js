@@ -2,7 +2,8 @@
  * Created by trebollo on 7/2/16.
  */
 
-angular.module('modularch')
+//angular.module('pg.imt')
+angular.module('pg.tasks')
 
     .service('TasksStore', function ($http) {
 

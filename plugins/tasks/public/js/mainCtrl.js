@@ -2,10 +2,10 @@
  * Created by trebollo on 7/2/16.
  */
 
-//angular.module('tasks')
-angular.module('modularch')
+//angular.module('pg.imt')
+angular.module('pg.tasks')
 
-    .controller('tasks.mainCtrl', function ($scope, TasksStore) {
+    .controller('pg.tasks.mainCtrl', function ($scope, TasksStore) {
 
         $scope.pluginName = 'Tasks Plugin';
         $scope.tasks = TasksStore.tasks;

@@ -2,7 +2,7 @@
  * Created by trebollo on 7/2/16.
  */
 
-angular.module('modularch')
+angular.module('pg.common')
 
     .service('PluginsStore', function ($http) {
 
@@ -14,9 +14,9 @@ angular.module('modularch')
             $http.get('/plugins').then(
                 function (res) {
                     self.plugins = res.data;
-                    callback(true);
+                    doCallback(callback, true);
                 }, function (err) {
-                    callback(false);
+                    doCallback(callback, false);
                 });
         };
 

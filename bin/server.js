@@ -6,9 +6,8 @@
  * Module dependencies.
  */
 
-var http            = require('http');
-var debug           = require('debug')('modularch');
-var app             = require('../app');
+var http  = require('http');
+var app   = require('../app');
 
 /**
  * Get port from environment and store in Express.
@@ -88,5 +87,5 @@ function onListening() {
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
 }
