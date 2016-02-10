@@ -1,7 +1,7 @@
 {
-  "name": "tasks",
+  "name": "dcm",
   "version": "1.0.0",
-  "description": "A plugin for a modularch project, that provides a trasparent management of tasks.",
+  "description": "This module or plugin represents a DCM and provides access to its functionality and its data.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,18 +15,11 @@
     "node-uuid": "^1.4.7"
   },
   "plugin": {
-    "provides": [
-      "TasksManager"
-    ],
+    "provides": [],
     "consumes": {},
     "public": {
-      "enabled": true,
-      "scripts": [
-        "/public/js/app.js",
-        "/public/js/mainCtrl.js",
-        "/public/js/tasksStore.js",
-        "/public/js/tasksActions.js"
-      ]
+      "enabled": false,
+      "scripts": []
     }
   }
 }

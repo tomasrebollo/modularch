@@ -7,18 +7,19 @@ function Plugin (def, dir) {
     this.name = def.name;
     this.version = def.version;
     this.description = def.description;
+    this.properties = def.plugin;
 
-    // Load the plugin and set a reference to its router handler
-    this.module = require(dir);
-    //this.router = this.module.router;
+    // Load the plugin and set a reference to its router han
+    var module = require(dir);
+    this.module = new module();
 }
 
 /**
  * Initializes the plugin module, passing a reference to the main App.
  * @param app
  */
-Plugin.prototype.init = function (app) {
-    this.module.init(app);
+Plugin.prototype.init = function (app, consumers) {
+    this.module.init(app, consumers);
 };
 
 module.exports = Plugin;

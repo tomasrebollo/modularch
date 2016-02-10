@@ -5,7 +5,7 @@
 var path        = require('path');
 var express     = require('express');
 var moduleDefs  = require('../package.json');
-var taskManager = require('../taskManager');
+var tasksManager = require('../tasksManager');
 
 var router = express.Router();
 
@@ -21,12 +21,12 @@ router.get('/about', function(req, res) {
 
 // Tasks resources
 router.get('/tasks', function(req, res) {
-    res.send(taskManager.getTasks());
+    res.send(tasksManager.getTasks());
 });
 
 // Tasks resources
 router.get('/tasks/:id', function(req, res) {
-    var task = taskManager.getTask(req.params.id);
+    var task = tasksManager.getTask(req.params.id);
     if (task) {
         res.send(task);
     } else {
@@ -35,7 +35,7 @@ router.get('/tasks/:id', function(req, res) {
 });
 
 router.post('/tasks/:name', function(req, res) {
-    var task = taskManager.create(req.params.name,
+    var task = tasksManager.create(req.params.name,
         function () {
             console.log('Executing task ' + this.name + ' crated on ' + this.created.toLocaleString() +
                         ((this.lastExecuted) ? ' and last executed on ' + this.lastExecuted.toLocaleString() : ''));
@@ -47,7 +47,7 @@ router.post('/tasks/:name', function(req, res) {
 });
 
 router.delete('/tasks/:id', function(req, res) {
-    if (taskManager.remove(req.params.id)) {
+    if (tasksManager.remove(req.params.id)) {
         res.sendStatus(200);
     } else {
         res.sendStatus(404);
@@ -55,7 +55,7 @@ router.delete('/tasks/:id', function(req, res) {
 });
 
 router.put('/tasks/:id/execute', function(req, res) {
-    if (taskManager.execute(req.params.id)) {
+    if (tasksManager.execute(req.params.id)) {
         res.sendStatus(200);
     } else {
         res.sendStatus(404);

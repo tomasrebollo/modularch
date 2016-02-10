@@ -15,9 +15,16 @@
     "node-uuid": "^1.4.7"
   },
   "plugin": {
-    "scripts": [
-      "/public/js/app.js",
-      "/public/js/mainCtrl.js"
-    ]
+    "provides": [],
+    "consumes": {
+      "tasks": "TasksManager"
+    },
+    "public": {
+      "enabled": true,
+      "scripts": [
+        "/public/js/app.js",
+        "/public/js/mainCtrl.js"
+      ]
+    }
   }
 }

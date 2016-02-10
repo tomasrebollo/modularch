@@ -45,7 +45,7 @@ angular.module('pg.imt', ['ui.router', 'ui.bootstrap', 'oc.lazyLoad', 'pg.common
 
                         // Lazy load each plugin's scripts, which are defined in each module's package.json 'plugin' property
                         angular.forEach(plugins, function (plugin) {
-                            var scripts = _.map(plugin.defs.scripts, function (script) { return plugin.name + script; });
+                            var scripts = _.map(plugin.defs.public.scripts, function (script) { return plugin.name + script; });
                             $ocLazyLoad.load(scripts)
                                 .then(function() { done(true); }, function() { done(false); });
                         });

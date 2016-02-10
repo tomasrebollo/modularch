@@ -14,6 +14,7 @@ var Task    = require('./models/task');
  */
 function TaskManager() {
     this.tasks = [];
+    this.maxTasks = 50;
 }
 
 /**

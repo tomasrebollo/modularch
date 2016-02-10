@@ -53,9 +53,9 @@ PluginManager.prototype.init = function (app) {
 PluginManager.prototype.loadPlugins = function() {
     var self = this;
     if (this.folder) {
-        console.log('Loading plugins from ' + this.folder + ' ...');
+        //console.log('Loading plugins from ' + this.folder + ' ...');
         var files = fs.readdirSync(this.folder);
-        _.map(files, function (file) {
+        _.forEach(files, function (file) {
             var pluginDir = path.resolve(self.folder, file);
             var stat = fs.statSync(pluginDir);
             if (stat.isDirectory()) {
@@ -67,6 +67,10 @@ PluginManager.prototype.loadPlugins = function() {
                 }
             }
         });
+
+        // Once all plugins has been loaded, resolve their dependencies and initialize them
+        this.resolveDependencies();
+
     } else {
         console.log('Error: Plugins folder has not been configured');
     }
@@ -77,19 +81,51 @@ PluginManager.prototype.loadPlugins = function() {
  * @param pluginDef    The plugin's package.json module definition.
  */
 PluginManager.prototype.register = function (pluginDef, pluginDir) {
+    this.plugins.push(new Plugin(pluginDef, pluginDir));
+};
 
-    // Create the plugin
-    var plugin = new Plugin(pluginDef, pluginDir);
+/**
+ * Adds a new plugin to this manager.
+ * @param pluginDef    The plugin's package.json module definition.
+ */
+PluginManager.prototype.resolveDependencies = function () {
+    var self = this;
 
-    // Configure the express router
-    //this.app.use('/' + plugin.name + '/public', express.static(path.resolve(this.folder, plugin.name, 'public')));
-    //this.app.use('/' + plugin.name, plugin.router);
+    // For each module or plugin check if all its dependencies on other modules can be resolved
+    _.forEach(this.plugins, function (plugin) {
+        //console.log('Resolving dependencies of plugin ' + plugin.name + ' ...');
+        var resolved = true;
+        var providers = {};
+        var dependencies = plugin.properties.consumes;
 
-    // Init the plugin
-    plugin.init(this.app);
+        // A plugin can have no dependencies on other plugins, so check it first
+        if (!_.isEmpty(dependencies)) {
+            _.forEach(dependencies, function (providerName, pluginName) {
+                // First get the right plugin, if exists
+                var pluginDep = _.find(self.plugins, {'name': pluginName});
+                if (pluginDep) {
+                    // Then retrieve the provider by its name, if exists
+                    var provider = pluginDep.module.providers[providerName];
+                    if (provider) {
+                        providers[providerName] = provider;
+                    } else {
+                        resolved = false;
+                        console.log('Error: The plugin ' + pluginName + ' does not provide ' + providerName +
+                                    ', which is required by the plugin ' + plugin.name);
+                    }
+                } else {
+                    resolved = false;
+                    console.log('Error: The plugin ' + pluginName + ' does not exists and its ' + providerName +
+                                ' provider is required by the plugin ' + plugin.name);
+                }
+            });
+        }
 
-    // Finally store the plugin
-    this.plugins.push(plugin);
+        // If plugin dependencies has been successfully resolved, initialize the plugin
+        if (resolved) {
+            plugin.init(self.app, providers);
+        }
+    });
 };
 
 

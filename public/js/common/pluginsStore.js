@@ -35,13 +35,13 @@ angular.module('pg.common')
             $http.get('/plugins').then(
                 function (res) {
                     self.plugins = res.data;
-                    async.map(self.plugins,
+                    async.map(res.data,
                         function (plugin, doneCallback) {
                             // Retrieve each plugin information
                             $http.get('/' + plugin.name + '/about')
                                 .then(function (aboutResponse) {
                                     plugin.defs = aboutResponse.data.plugin;
-                                    doneCallback(null, aboutResponse.data);
+                                    doneCallback(null, plugin.defs);
                                 }, function (err) {
                                     doneCallback(new Error('Impossible to get information about plugin \'' + plugin.name + '\''));
                                 });
