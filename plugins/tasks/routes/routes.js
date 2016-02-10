@@ -54,7 +54,7 @@ router.delete('/tasks/:id', function(req, res) {
     }
 });
 
-router.post('/tasks/:id/execute', function(req, res) {
+router.put('/tasks/:id/execute', function(req, res) {
     if (taskManager.execute(req.params.id)) {
         res.sendStatus(200);
     } else {

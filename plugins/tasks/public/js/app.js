@@ -2,7 +2,7 @@
  * Created by trebollo on 6/2/16.
  */
 
-angular.module('pg.tasks', ['pg.common', 'ui.router'])
+angular.module('pg.tasks', ['ui.router', 'pg.common', 'ui.bootstrap', 'ui.bootstrap.contextMenu'])
 
     .config(function($stateProvider, $urlRouterProvider) {
 

@@ -4,35 +4,18 @@
 
 angular.module('pg.common')
 
-    .service('PluginsStore', function ($http, CommonDispatcher) {
+    .service('PluginsStore', function ($http, EventManager, CommonDispatcher) {
 
         this.plugins = [];
-        this.listeners = [];
-        this.events = {
-            TEST: 'TEST'
-        };
+        this.eventManager = new EventManager();
 
         /**
-         * Emits an event to all subscribed listeners.
-         * @param event
+         * Registers a listener that will be notified whenever given event raises.
+         * @param event     The event the listener wants to be subscribed to.
+         * @param callback  A function to be executed whenever the event raises.
          */
-        this.listenTo = function (event, callback) {
-            if (!this.listeners[event]) {
-                this.listeners[event] = [];
-            }
-            this.listeners[event].push(callback);
-        };
-
-        /**
-         * Emits an event to all subscribed listeners.
-         * @param event
-         */
-        this.emitEvent = function (event) {
-            if (this.listeners[event]) {
-                angular.forEach(this.listeners[event], function (callback) {
-                    doCallback(callback);
-                });
-            }
+        this.register = function (event, callback) {
+            this.eventManager.register(event, callback);
         };
 
         /**
@@ -41,7 +24,7 @@ angular.module('pg.common')
          */
         this.getPlugins = function() {
             return this.plugins;
-        }
+        };
 
         /**
          * Load the plugins from server.
@@ -75,5 +58,9 @@ angular.module('pg.common')
                     doCallback(callback, null);
                 });
         };
+
+        // Register this store to selected events from the common dispatcher, just to be notified
+        // whenever they occur and then take the actions in consequence
+        CommonDispatcher.register('PLUGIN_ADDED', this.loadPlugins);
 
     });

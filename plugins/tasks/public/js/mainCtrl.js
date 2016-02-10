@@ -4,11 +4,19 @@
 
 angular.module('pg.tasks')
 
-    .controller('pg.tasks.mainCtrl', function ($scope, TasksStore, PluginsStore) {
+    .controller('pg.tasks.mainCtrl', function ($scope, TasksStore, TasksActions, PluginsStore) {
 
         $scope.pluginName = 'Tasks Plugin';
         $scope.tasks = TasksStore.getTasks();
         $scope.plugins = PluginsStore.getPlugins();
+
+        // Context menu options for tasks
+        $scope.taskMenuOptions = function (task) {
+            return [
+                ['Execute', function ($itemScope) { $scope.executeTask($itemScope.task); }],
+                ['Dismiss', function ($itemScope) { $scope.removeTask($itemScope.task); }]
+            ];
+        };
 
         /**
          * Retrieves the tasks form the TasksStore.
@@ -20,8 +28,8 @@ angular.module('pg.tasks')
         /**
          * Creates a new random task.
          */
-        $scope.createNewTask = function () {
-            TasksStore.createNewTask();
+        $scope.createTask = function () {
+            TasksActions.createTask();
         };
 
         /**
@@ -29,7 +37,7 @@ angular.module('pg.tasks')
          * @param task
          */
         $scope.executeTask = function (task) {
-            TasksStore.executeTask(task);
+            TasksActions.executeTask(task);
         };
 
         /**
@@ -37,7 +45,7 @@ angular.module('pg.tasks')
          * @param task
          */
         $scope.removeTask = function (task) {
-            TasksStore.removeTask(task);
+            TasksActions.removeTask(task);
         };
 
         // Subscribe to TaskStore events

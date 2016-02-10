@@ -18,7 +18,8 @@
     "scripts": [
       "/public/js/app.js",
       "/public/js/mainCtrl.js",
-      "/public/js/tasksStore.js"
+      "/public/js/tasksStore.js",
+      "/public/js/tasksActions.js"
     ]
   }
 }

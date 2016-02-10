@@ -42,6 +42,7 @@ TaskManager.prototype.getTask = function (id) {
  */
 TaskManager.prototype.create = function (name, taskFn, doneFn) {
     var task = new Task(name);
+    task.description = 'This is a test description of the task';
     task.taskCallback = taskFn;
     task.doneCallback = doneFn;
     this.tasks.push(task);
@@ -78,7 +79,7 @@ TaskManager.prototype.execute = function (id) {
 
             // Update task properties once completed
             task.lastExecuted = new Date();
-            task.progress = 100;
+            task.progress = Math.round(Math.random() * 80) + 20;
             task.state = common.taskStates.finished;
 
             // If defined, execute the 'done' callback function

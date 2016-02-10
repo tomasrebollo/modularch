@@ -12,6 +12,7 @@ var common = require('./common');
 function Task (name) {
     this.id = uuid.v4();
     this.name = name;
+    this.description = null;
     this.state = common.taskStates.stopped;
     this.progress = 0;
     this.created = new Date();

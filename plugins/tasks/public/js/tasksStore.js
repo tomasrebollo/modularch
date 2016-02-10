@@ -4,10 +4,10 @@
 
 angular.module('pg.tasks')
 
-    .service('TasksStore', function ($http, EventManager) {
+    .service('TasksStore', function ($http, EventManager, CommonDispatcher) {
 
-        this.tasks = [];
-        this.eventManager = new EventManager();
+        var tasks = [];
+        var eventManager = new EventManager();
 
         /**
          * Registers a listener that will be notified whenever given event raises.
@@ -15,21 +15,20 @@ angular.module('pg.tasks')
          * @param callback  A function to be executed whenever the event raises.
          */
         this.register = function (event, callback) {
-            this.eventManager.register(event, callback);
+            eventManager.register(event, callback);
         };
 
         /**
          * Load the tasks from server.
-         * @param callback
+         * @param callback  Optional callback function to be called when done.
          */
         this.loadTasks = function (callback) {
-            var self = this;
             $http.get('/tasks/tasks').then(
                 function (res) {
-                    self.tasks = res.data;
-                    doCallback(callback, true);
+                    tasks = res.data;
+                    doCallback(callback, tasks);
                 }, function (err) {
-                    doCallback(callback, false);
+                    doCallback(callback, null);
                 });
         };
 
@@ -38,7 +37,7 @@ angular.module('pg.tasks')
          * @returns {pg.tasks|Array|*}
          */
         this.getTasks = function () {
-            return this.tasks;
+            return tasks;
         };
 
         /**
@@ -50,38 +49,45 @@ angular.module('pg.tasks')
             $http.post('/tasks/tasks/' + name, null)
                 .then(function (res) {
                         self.loadTasks(function () {
-                            self.eventManager.emit('TASK_ADDED');
+                            eventManager.emit('TASK_ADDED');
                         });
                     }
                 );
         };
 
         /**
-         * Executres a given task.
-         * @param task
+         * Executes a given task.
+         * @param task  The task to execute.
          */
         this.executeTask = function (task) {
             var self = this;
-            $http.post('/tasks/tasks/' + task.id + '/execute', null)
+            $http.put('/tasks/tasks/' + task.id + '/execute', null)
                 .then(function (res) {
                     self.loadTasks(function () {
-                        self.eventManager.emit('TASK_UPDATED');
+                        eventManager.emit('TASK_UPDATED');
                     });
                 });
         };
 
         /**
-         * Executres a given task.
-         * @param task
+         * Removes the given task.
+         * @param task  The task to remove.
          */
         this.removeTask = function (task) {
             var self = this;
             $http.delete('/tasks/tasks/' + task.id)
                 .then(function (res) {
                     self.loadTasks(function () {
-                        self.eventManager.emit('TASK_REMOVED');
+                        eventManager.emit('TASK_REMOVED');
                     });
                 });
         };
+
+        // Register this store to selected events from the common dispatcher, just to be notified
+        // whenever they occur and then take the actions in consequence. (te 'bind' if for passing
+        // the correct 'this' to the function)
+        CommonDispatcher.register('TASK_ADD', this.createNewTask.bind(this));
+        CommonDispatcher.register('TASK_EXECUTE', this.executeTask.bind(this));
+        CommonDispatcher.register('TASK_REMOVE', this.removeTask.bind(this));
 
     });

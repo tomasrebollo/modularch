@@ -1,8 +1,14 @@
 
 /* Overrides default margins of Bootstrap progress bars  */
 .progress {
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
+    height: 0.6rem;
+    margin-bottom: 0.1rem;
+    margin-top: 0.5rem;
+}
+
+/* Overwrites default Bootstrap list items padding */
+.list-group-item {
+    padding: 0.5rem 1rem;
 }
 
 .nav-user-info {
@@ -11,4 +17,43 @@
     padding-bottom: 0px;
     margin-bottom: 0px;
     font-size: 90%;
+}
+
+/* Overwrites default Bootstrap drop-down toggle arrow icon */
+.dropdown-menu {
+    border-radius: 0.2rem;
+    font-size: 11pt;
+    box-shadow: 2px 4px 8px #888888;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    width: 100%;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    color: #373a3c;
+    text-align: inherit;
+    white-space: nowrap;
+    background: none;
+    border: 0;
+}
+
+.dropdown-menu > li > a:hover {
+    color: #2b2d2f;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-toggle::before {
+    position: relative;
+    bottom: 2px;
+    content: "\f078";
+    font-family: FontAwesome;
+    font-size: 80%;
+    cursor: pointer;
 }
