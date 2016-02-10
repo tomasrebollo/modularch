@@ -2,12 +2,13 @@
  * Created by trebollo on 5/2/16.
  */
 
-var _       = require('lodash');
-var fs      = require('fs');
-var path    = require('path');
-var express = require('express');
-var Plugin  = require('./models/plugin');
-var pkgJson = require('./package.json');
+var _           = require('lodash');
+var fs          = require('fs');
+var path        = require('path');
+var express     = require('express');
+var properties  = require('./package.json');
+var Plugin      = require('./models/plugin');
+var dataManager = require('./dataManager');
 
 /**
  * A manager for controlling all plugins.
@@ -16,7 +17,7 @@ var pkgJson = require('./package.json');
 function PluginManager () {
     this.app = null;
     this.plugins = [];
-    this.folder = path.resolve(__dirname, pkgJson.plugins);
+    this.folder = path.resolve(__dirname, properties.plugins);
 }
 
 /**
@@ -95,8 +96,12 @@ PluginManager.prototype.resolveDependencies = function () {
     _.forEach(this.plugins, function (plugin) {
         //console.log('Resolving dependencies of plugin ' + plugin.name + ' ...');
         var resolved = true;
-        var providers = {};
         var dependencies = plugin.properties.consumes;
+
+        // Always add the dataManager as a provider
+        var providers = {
+            DataManager: dataManager
+        };
 
         // A plugin can have no dependencies on other plugins, so check it first
         if (!_.isEmpty(dependencies)) {

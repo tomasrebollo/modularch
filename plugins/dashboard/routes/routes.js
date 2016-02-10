@@ -20,7 +20,7 @@ router.get('/about', function(req, res) {
 });
 
 router.get('/dcms', function(req, res) {
-    res.send(common.dcms);
+    res.send(common.dataManager.dcms);
 });
 
 router.post('/test', function(req, res) {
@@ -29,7 +29,7 @@ router.post('/test', function(req, res) {
     dcm.data.address = req.body.address;
     dcm.data.port = req.body.port;
 
-    common.dcms.push(dcm.data);
+    common.dataManager.dcms.push(dcm.data);
 
     res.sendStatus(200);
 });

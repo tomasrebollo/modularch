@@ -10,7 +10,7 @@ var common = {
 
     // Stores a reference to the main Express app
     app: null,
-    dcms: []
+    dataManager: null
 };
 
 module.exports = common;

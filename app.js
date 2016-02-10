@@ -31,13 +31,13 @@ app.use('/', indexRouter);
 app.use('/data', dataRouter);
 app.use('/plugins', pluginsRouter);
 
-// Initialize the data manager
+// Initialize the managers
 dataManager.init(app);
-
-// Initialize the plugins manager
 pluginManager.init(app);
 
-// Catch 404 and forward to error handler
+// Catch 404 and forward to error handler.
+// NOT: This needs to be established at the end in order to not
+// overwrite possible routes definitions made by plugins or other modules.
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;

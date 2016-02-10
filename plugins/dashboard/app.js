@@ -26,17 +26,18 @@ function Dashboard () {
 
 /**
  * Initializes everything.
- * @param app           The express main application.
- * @param consumers     A list containing all consumers this module or plugin needs.
- * @returns {{Array}}   Returns an array containing all providers. Each key matches the name specified in
- *                      package.json, by "plugin":{"providers":[]} property, and the value is the provider itself.
+ * @param app               The express main application.
+ * @param otherProviders    A list containing all consumers this module or plugin needs.
+ * @returns {{Array}}       Returns an array containing all providers. Each key matches the name specified in
+ *                          package.json, by "plugin":{"providers":[]} property, and the value is the provider itself.
  */
-Dashboard.prototype.init = function (app, consumers) {
+Dashboard.prototype.init = function (app, otherProviders) {
     console.log('Initializing plugin Dashboard ...');
 
     // Extract required elements from the consumers list, injected by the Plugin Manager
-    common.tasksManager = consumers.TasksManager;
     common.app = app;
+    common.dataManager = otherProviders.DataManager;
+    common.tasksManager = otherProviders.TasksManager;
 
     // Configure the express router
     app.use('/' + properties.name, express.static(path.resolve(__dirname)));
