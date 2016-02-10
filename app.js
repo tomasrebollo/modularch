@@ -6,9 +6,12 @@
 var express       = require('express');
 var bodyParser    = require('body-parser');
 
-var authRouter    = require('./routes/auth');
-var indexRouter   = require('./routes/index');
-var pluginsRouter = require('./routes/plugins');
+var indexRouter   = require('./routes/indexRouter');
+var authRouter    = require('./routes/authRouter');
+var dataRouter    = require('./routes/dataRouter');
+var pluginsRouter = require('./routes/pluginsRouter');
+
+var dataManager   = require('./dataManager');
 var pluginManager = require('./pluginManager');
 
 // Create an express application to manage the HTTP REST API
@@ -25,7 +28,11 @@ app.use(express.static(__dirname + '/public/imgs'));
 // Every request should be checked for authorisation first
 app.use('*', authRouter);
 app.use('/', indexRouter);
+app.use('/data', dataRouter);
 app.use('/plugins', pluginsRouter);
+
+// Initialize the data manager
+dataManager.init(app);
 
 // Initialize the plugins manager
 pluginManager.init(app);
