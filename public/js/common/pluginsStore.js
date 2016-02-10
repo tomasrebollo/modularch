@@ -60,7 +60,8 @@ angular.module('pg.common')
         };
 
         // Register this store to selected events from the common dispatcher, just to be notified
-        // whenever they occur and then take the actions in consequence
-        CommonDispatcher.register('PLUGIN_ADDED', this.loadPlugins);
+        // whenever they occur and then take the actions in consequence. (The 'bind' is for passing
+        // the correct 'this' to the function)
+        CommonDispatcher.register('PLUGIN_ADDED', this.loadPlugins.bind(this));
 
     });

@@ -9,6 +9,8 @@ var _ = require('lodash');
  * @constructor
  */
 function DataModel () {
+    this.address = null;
+    this.port = null;
     this.pools = [];
     this.hosts = [];
     this.vms = [];
@@ -70,7 +72,7 @@ DataModel.prototype.removeHost = function (handler) {
 };
 
 /**
- * Retrieves all the VM.
+ * Retrieves all the VMs.
  * @returns {Array}
  */
 DataModel.prototype.getVMs = function() {
@@ -95,5 +97,82 @@ DataModel.prototype.removeVM = function (handler) {
     return _.remove(this.vms, {'handler': handler});
 };
 
+/**
+ * Retrieves all the Game Nodes.
+ * @returns {Array}
+ */
+DataModel.prototype.getGameNodes = function() {
+    return _.chain(this.gameNodes);
+};
+
+/**
+ * Retrieves a Game Node by its token.
+ * @param token   The unique identifier of Game Node session.
+ * @returns {*}
+ */
+DataModel.prototype.getGameNode = function (token) {
+    return _.find(this.gameNodes, {'token': token});
+};
+
+/**
+ * Removes a Game Node identified by its token.
+ * @param token   The unique identifier of Game Node session.
+ * @returns {*}
+ */
+DataModel.prototype.removeGameNode = function (token) {
+    return _.remove(this.gameNodes, {'token': token});
+};
+
+/**
+ * Retrieves all the VM Templates.
+ * @returns {Array}
+ */
+DataModel.prototype.getVMTemplates = function() {
+    return _.chain(this.vmTemplates);
+};
+
+/**
+ * Retrieves a VM Template by its name.
+ * @param name   The unique identifier of VM Template.
+ * @returns {*}
+ */
+DataModel.prototype.getVMTemplate = function (name) {
+    return _.find(this.vmTemplates, {'name': name});
+};
+
+/**
+ * Removes a VM Template identified by its name.
+ * @param name   The unique identifier of VM Template.
+ * @returns {*}
+ */
+DataModel.prototype.removeVMTemplate = function (name) {
+    return _.remove(this.vmTemplates, {'name': name});
+};
+/**
+ * Retrieves all the GPU Templates.
+ * @returns {Array}
+ */
+DataModel.prototype.getGPUTemplates = function() {
+    return _.chain(this.gpuTemplates);
+};
+
+/**
+ * Retrieves a GPU Template by its name.
+ * @param model   The unique identifier of GPU Template.
+ * @returns {*}
+ */
+DataModel.prototype.getGPUTemplate = function (model) {
+    return _.find(this.gpuTemplates, {'name': model});
+};
+
+/**
+ * Removes a GPU Template identified by its name.
+ * @param model   The unique identifier of GPU Template.
+ * @returns {*}
+ */
+DataModel.prototype.removeGPUTemplate = function (model) {
+    return _.remove(this.gpuTemplates, {'model': model});
+};
+
 // Export it as a singleton
-module.exports = new DataModel();
+module.exports = DataModel;

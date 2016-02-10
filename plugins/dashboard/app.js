@@ -5,7 +5,7 @@
 var path        = require('path');
 var express     = require('express');
 var router      = require('./routes/routes');
-var moduleDefs  = require('./package.json');
+var properties  = require('./package.json');
 var common      = require('./models/common');
 
 /**
@@ -17,7 +17,7 @@ function Dashboard () {
     this.router = router;
 
     // Store a reference to this module properties defined in its package.json file
-    this.properties = moduleDefs;
+    this.properties = properties;
 
     // This are all the elements this module or plugin provides. They must be defined with
     // same key name in package.json file, inside the plugins and providers property.
@@ -36,10 +36,11 @@ Dashboard.prototype.init = function (app, consumers) {
 
     // Extract required elements from the consumers list, injected by the Plugin Manager
     common.tasksManager = consumers.TasksManager;
+    common.app = app;
 
     // Configure the express router
-    app.use('/' + moduleDefs.name, express.static(path.resolve(__dirname)));
-    app.use('/' + moduleDefs.name, router);
+    app.use('/' + properties.name, express.static(path.resolve(__dirname)));
+    app.use('/' + properties.name, router);
 }
 
 module.exports = Dashboard;

@@ -84,7 +84,7 @@ angular.module('pg.tasks')
         };
 
         // Register this store to selected events from the common dispatcher, just to be notified
-        // whenever they occur and then take the actions in consequence. (te 'bind' if for passing
+        // whenever they occur and then take the actions in consequence. (The 'bind' is for passing
         // the correct 'this' to the function)
         CommonDispatcher.register('TASK_ADD', this.createNewTask.bind(this));
         CommonDispatcher.register('TASK_EXECUTE', this.executeTask.bind(this));

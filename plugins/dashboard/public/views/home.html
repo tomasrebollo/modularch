@@ -13,4 +13,11 @@
         <button class="btn btn-sm btn-primary" ng-click="addTask(taskName)"><i class="fa fa-bolt"></i> Add Task</button>
     </div>
 
+    <div>
+        <p>Add a new DCM, just for testing purposes</p>
+        <input type="text" ng-model="address" ng-init="address = '172.16.100.162'">
+        <input type="text" ng-model="port" ng-init="port = 8080">
+        <button class="btn btn-sm btn-primary" ng-click="addDCM(address, port)"><i class="fa fa-bolt"></i> Add DCM</button>
+    </div>
+
 </div>

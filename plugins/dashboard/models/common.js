@@ -6,7 +6,11 @@
 // constants definitions, enumerates, etc.
 var common = {
     // A manager for executing tasks (from tasks plugin)
-    tasksManager: null
+    tasksManager: null,
+
+    // Stores a reference to the main Express app
+    app: null,
+    dcms: []
 };
 
 module.exports = common;
