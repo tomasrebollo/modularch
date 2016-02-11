@@ -5,8 +5,8 @@
 var path         = require('path');
 var express      = require('express');
 var router       = require('./routes/routes');
+var properties   = require('./package.json');
 var tasksManager = require('./tasksManager');
-var moduleDefs   = require('./package.json');
 
 /**
  * Manages everything related to tasks and their executions.
@@ -15,9 +15,6 @@ var moduleDefs   = require('./package.json');
 function Tasks () {
     // This module Express router that handles the HTTP endpoints
     this.router = router;
-
-    // Store a reference to this module properties defined in its package.json file
-    this.properties = moduleDefs;
 
     // This are all the elements this module or plugin provides. They must be defined with
     // same key name in package.json file, inside the plugins and providers property.
@@ -40,8 +37,8 @@ Tasks.prototype.init = function (app, consumers) {
     // i.e.: var provider = consumers.providerName;
 
     // Configure the express router
-    app.use('/' + moduleDefs.name, express.static(path.resolve(__dirname)));
-    app.use('/' + moduleDefs.name, router);
+    app.use('/' + properties.name, express.static(path.resolve(__dirname)));
+    app.use('/' + properties.name, router);
 }
 
 module.exports = Tasks;

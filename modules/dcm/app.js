@@ -22,8 +22,19 @@ function DCM (app) {
     // Handles real DCM data model
     this.data = new DataModel();
 
-    // Configure the express router
+    // Initialize the DCM
+    this.init(app);
+};
+
+/**
+ * Initializes and configures everything. More specifically configures the
+ * REST HTTP endpoints of DCM for all its resources (Pools, Hosts, etc.).
+ * @param app   The main Express application.
+ */
+DCM.prototype.init = function (app) {
+    // This is for serving static resources (frontend scripts fr example)
     app.use('/' + properties.name, express.static(path.resolve(__dirname)));
+    // All DCM resources separated by type
     app.use('/' + properties.name, router);
     app.use('/' + properties.name + '/pools', poolsRouter);
     app.use('/' + properties.name + '/hosts', hostsRouter);
@@ -31,7 +42,7 @@ function DCM (app) {
     app.use('/' + properties.name + '/gameNodes', gameNodesRouter);
     app.use('/' + properties.name + '/vmTemplates', vmTemplatesRouter);
     app.use('/' + properties.name + '/gpuTemplates', gpuTemplatesRouter);
-};
+}
 
 // Expose this as a singleton
 module.exports = DCM;

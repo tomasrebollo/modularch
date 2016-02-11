@@ -7,8 +7,8 @@ var fs          = require('fs');
 var path        = require('path');
 var express     = require('express');
 var properties  = require('./package.json');
-var Plugin      = require('./models/plugin');
 var dataManager = require('./dataManager');
+var Plugin      = require('./models/plugin');
 
 /**
  * A manager for controlling all plugins.

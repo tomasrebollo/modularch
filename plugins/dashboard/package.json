@@ -4,12 +4,14 @@
   "description": "A plugin for a modularch project, that provides a dashboard for managing a PlayGiga installation environment.",
   "main": "app.js",
   "scripts": {
+    "start": "node ./bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "trebollo",
   "license": "GPL-3.0",
   "dependencies": {
     "async": "^1.5.2",
+    "body-parser": "^1.14.2",
     "express": "^4.13.4",
     "lodash": "^4.2.1",
     "node-uuid": "^1.4.7",

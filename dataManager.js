@@ -12,7 +12,6 @@ var DCM     = require('dcm');
  */
 function DataManager () {
     this.app = null;
-    this.cm = null;
     this.dcms = [];
 }
 
