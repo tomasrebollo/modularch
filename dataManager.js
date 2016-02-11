@@ -45,7 +45,7 @@ DataManager.prototype.init = function (app) {
     var dcm = new DCM(app);
     dcm.data.address = 'localhost';
     dcm.data.port = 8080;
-    this.dcms.push(dcm);
+    this.dcms.push(dcm.data);
     // END DEBUG
 }
 
