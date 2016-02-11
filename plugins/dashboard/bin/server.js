@@ -15,11 +15,16 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Configure the Dashboard application
+// Configure the Tasks application first
 var tasksApp = new TasksApp();
+tasksApp.init(app, {});
+
+// Configure the Dashboard application
 var dashboardApp = new DashboardApp();
-tasksApp.init(app);
-dashboardApp.init(app, []);
+var providers = {
+    TasksManager: tasksApp.providers.TasksManager
+};
+dashboardApp.init(app, providers);
 
 // Catch 404 and forward to error handler.
 // NOT: This needs to be established at the end in order to not
