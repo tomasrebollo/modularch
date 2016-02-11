@@ -7,7 +7,7 @@ var http       = require('http');
 var express    = require('express');
 var bodyParser = require('body-parser');
 
-//var TasksApp     = require('tasks');
+var TasksApp     = require('tasks');
 var DashboardApp = require('../app');
 
 // Create an express application to manage the HTTP REST API
@@ -16,7 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure the Dashboard application
+var tasksApp = new TasksApp();
 var dashboardApp = new DashboardApp();
+tasksApp.init(app);
 dashboardApp.init(app, []);
 
 // Catch 404 and forward to error handler.

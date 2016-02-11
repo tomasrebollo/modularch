@@ -15,7 +15,8 @@
     "express": "^4.13.4",
     "lodash": "^4.2.1",
     "node-uuid": "^1.4.7",
-    "dcm": "1.0.0"
+    "dcm": "^1.0.0",
+    "tasks": "^1.0.0"
   },
   "plugin": {
     "provides": [],
